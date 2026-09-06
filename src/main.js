@@ -18,13 +18,13 @@ const regexPatterns = {
     // Discover: starting with 6 and is 16 digits long
     // American Express: starting with 3 and is 15 digits long
     /(?:4[0-9]{12}(?:[0-9]{3})?|(?:5[1-5][0-9]{14}|222[1-9][0-9]{12}|22[3-9][0-9]{13}|2[3-6][0-9]{14}|27[01][0-9]{13}|2720[0-9]{12})|6(?:011|5[0-9]{2})[0-9]{12}|3[47][0-9]{13})/g,
-    // This regex matches phone-number , allowing optional spaces, hyphens, or parentheses anywhere in the number.
-    // It requires 8 to 17 total digits between a leading and trailing digit. 
-    // separators are optional. this means an unbroken 8-17 digit like a credit card number can match too. but it is so that also phone numbers with no separators can be matched.
-    phoneNumberRegex: /\+?[0-9][0-9\s\-()]{7,16}[0-9]/g,
-    // This regex matches time formats in both 12-hour and 24-hour formats.
-    // it allows for optional leading zeros and ensuring valid hour and minute values.
-    timeFormatRegex: /(?:[01]?\d|2[0-3]):[0-5]\d/g,
+  // This regex matches phone-number , allowing optional spaces, hyphens, or parentheses anywhere in the number.
+  // It requires 8 to 17 total digits between a leading and trailing digit.
+  // separators are optional. this means an unbroken 8-17 digit like a credit card number can match too. but it is so that also phone numbers with no separators can be matched.
+  phoneNumberRegex: /\+?[0-9][0-9\s\-()]{7,16}[0-9]/g,
+  // This regex matches time formats in both 12-hour and 24-hour formats.
+  // it allows for optional leading zeros and ensuring valid hour and minute values.
+  timeFormatRegex: /(?:[01]?\d|2[0-3]):[0-5]\d/g,
 };
 
 const validEmails = [];
@@ -44,46 +44,24 @@ async function regexOnboarding(path) {
       const matchingEmails = line.match(regexPatterns.emailRegex);
       if (matchingEmails) {
         validEmails.push(...matchingEmails);
-        appendFileSync(outputFile, "Valid Emails:\n", "utf8");
-        appendFileSync(outputFile, matchingEmails.join("\n") + "\n", "utf8");
       }
       const matchingALUEmails = line.match(regexPatterns.aluEmailSpecificRegex);
       if (matchingALUEmails) {
         validALUEmails.push(...matchingALUEmails);
-        appendFileSync(outputFile, "Valid ALU Emails:\n", "utf8");
-        appendFileSync(outputFile, matchingALUEmails.join("\n") + "\n", "utf8");
       }
       const matchingCreditCards = cleanCreditCardNumber(line).match(
         regexPatterns.creditCardRegex,
       );
       if (matchingCreditCards) {
         validCreditCards.push(...matchingCreditCards);
-        appendFileSync(outputFile, "Valid Credit Cards:\n", "utf8");
-        appendFileSync(
-          outputFile,
-          matchingCreditCards.join("\n") + "\n",
-          "utf8",
-        );
       }
       const matchingPhoneNumbers = line.match(regexPatterns.phoneNumberRegex);
       if (matchingPhoneNumbers) {
         validPhoneNumbers.push(...matchingPhoneNumbers);
-        appendFileSync(outputFile, "Valid Phone Numbers:\n", "utf8");
-        appendFileSync(
-          outputFile,
-          matchingPhoneNumbers.join("\n") + "\n",
-          "utf8",
-        );
       }
       const matchingTimeFormats = line.match(regexPatterns.timeFormatRegex);
       if (matchingTimeFormats) {
         validTimeFormats.push(...matchingTimeFormats);
-        appendFileSync(outputFile, "Valid Time Formats:\n", "utf8");
-        appendFileSync(
-          outputFile,
-          matchingTimeFormats.join("\n") + "\n",
-          "utf8",
-        );
       }
     });
     line.on("close", () => {
@@ -92,6 +70,13 @@ async function regexOnboarding(path) {
       console.log("Valid credit cards found:", validCreditCards);
       console.log("Valid phone numbers found:", validPhoneNumbers);
       console.log("Valid time formats found:", validTimeFormats);
+
+      // Write the results to the output file
+      writeFileSync(
+        outputFile,
+        `Valid emails found:\n ${validEmails.join("\n")}\n\nValid ALU emails found:\n ${validALUEmails.join("\n")}\n\nValid credit cards found:\n ${validCreditCards.join("\n")}\n\nValid phone numbers found:\n ${validPhoneNumbers.join("\n")}\n\nValid time formats found:\n ${validTimeFormats.join("\n")}`,
+        "utf8",
+      );
     });
   } catch (error) {
     console.error("Error during regex onboarding:", error);
