@@ -49,7 +49,7 @@ flagging it should probably be masked in your system, not printed to logs in pla
 From: partnerships@vendor-invoices.biz
 Subject: Invoice #REF-2291
 Body:
-Total due: KES 12,500.00 by 2025-12-01. Alternate contact: +254 (0) 712 345 678 or 020-2345678.
+Total due: KES 12,500.00 by 2025-12-01. Alternate contact: +254 (0) 712 345 678, 020-2345678 or +250 794 021 590.
 Site: https://vendor-invoices.biz/inv/2291?ref=alu&utm_source=email&utm_campaign=q4
 Bad URL sample (should be rejected): htp:/vendor-invoices..biz//inv
 Time sample edge cases: 00:00, 24:61 (invalid), 13:00PM (invalid 24h+meridiem mix), 9:5 (invalid)

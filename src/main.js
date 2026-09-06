@@ -1,5 +1,6 @@
 import { createReadStream, writeFileSync, appendFileSync } from "fs";
 import { createInterface } from "readline";
+
 const regexPatterns = {
   //this email regex matches all valid email addresses, even ones with subdomains, allowed special charaters.
   //an email beginning with special characters or using the @ symbol in the wrong place or twice consecutively will not be matched.
@@ -17,12 +18,13 @@ const regexPatterns = {
     // Discover: starting with 6 and is 16 digits long
     // American Express: starting with 3 and is 15 digits long
     /(?:4[0-9]{12}(?:[0-9]{3})?|(?:5[1-5][0-9]{14}|222[1-9][0-9]{12}|22[3-9][0-9]{13}|2[3-6][0-9]{14}|27[01][0-9]{13}|2720[0-9]{12})|6(?:011|5[0-9]{2})[0-9]{12}|3[47][0-9]{13})/g,
-    // This regex matches phone number formats that are internationally recognized, making country codes optional.
-    // it only allows digits with a maximum number of 15 digits, and an optional + sign at the start.
-    phoneNumberRegex: /^\+?[0-9]\d{1,14}$/,
+    // This regex matches phone-number , allowing optional spaces, hyphens, or parentheses anywhere in the number.
+    // It requires 8 to 17 total digits between a leading and trailing digit. 
+    // separators are optional. this means an unbroken 8-17 digit like a credit card number can match too. but it is so that also phone numbers with no separators can be matched.
+    phoneNumberRegex: /\+?[0-9][0-9\s\-()]{7,16}[0-9]/g,
     // This regex matches time formats in both 12-hour and 24-hour formats.
     // it allows for optional leading zeros and ensuring valid hour and minute values.
-    timeFormatRegex: /^(?:[01]?\d|2[0-3]):[0-5]\d$/,
+    timeFormatRegex: /(?:[01]?\d|2[0-3]):[0-5]\d/g,
 };
 
 const validEmails = [];
@@ -100,5 +102,16 @@ async function regexOnboarding(path) {
 function cleanCreditCardNumber(cardNumber) {
   return cardNumber.replace(/[\s-]\D/g, "");
 }
+
+// In order not to have the result from a previous run in the current output, we clear the output file before running the program again
+function clearOutputFile() {
+  try {
+    writeFileSync(outputFile, "", "utf8");
+  } catch (error) {
+    console.error("Error clearing output file:", error);
+  }
+}
+
+clearOutputFile();
 
 regexOnboarding("input/test.txt");
