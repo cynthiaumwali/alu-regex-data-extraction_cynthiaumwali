@@ -20,6 +20,8 @@ const regexPatterns = {
     // This regex matches phone number formats that are internationally recognized, making country codes optional.
     // it only allows digits with a maximum number of 15 digits, and an optional + sign at the start.
     phoneNumberRegex: /^\+?[0-9]\d{1,14}$/,
+    // This regex matches time formats in both 12-hour and 24-hour formats.
+    // it allows for optional leading zeros and ensuring valid hour and minute values.
     timeFormatRegex: /^(?:[01]?\d|2[0-3]):[0-5]\d$/,
 };
 
@@ -27,6 +29,7 @@ const validEmails = [];
 const validALUEmails = [];
 const validCreditCards = [];
 const validPhoneNumbers = [];
+const validTimeFormats = [];
 
 const outputFile = "./output/results.txt";
 async function regexOnboarding(path) {
@@ -70,12 +73,23 @@ async function regexOnboarding(path) {
           "utf8",
         );
       }
+      const matchingTimeFormats = line.match(regexPatterns.timeFormatRegex);
+      if (matchingTimeFormats) {
+        validTimeFormats.push(...matchingTimeFormats);
+        appendFileSync(outputFile, "Valid Time Formats:\n", "utf8");
+        appendFileSync(
+          outputFile,
+          matchingTimeFormats.join("\n") + "\n",
+          "utf8",
+        );
+      }
     });
     line.on("close", () => {
       console.log("Valid emails found:", validEmails);
       console.log("Valid ALU emails found:", validALUEmails);
       console.log("Valid credit cards found:", validCreditCards);
       console.log("Valid phone numbers found:", validPhoneNumbers);
+      console.log("Valid time formats found:", validTimeFormats);
     });
   } catch (error) {
     console.error("Error during regex onboarding:", error);
