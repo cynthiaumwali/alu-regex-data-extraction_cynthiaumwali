@@ -43,6 +43,6 @@ Matches `HH:MM` where the hour is `00`–`23` and the minute is `00`–`59`.
 Accepts both 12-hour and 24-hour hour values, since 12-hour hours (`1`–`12`) are a subset of the 24-hour range.
 
 ## Recap of known issues
-
+- `emailRegex` can match emails like 'student@alueducation.com.evil-domain.net' AND 'attacker@evil.com' as they look like valid emails but possibly malicious. Domain trustworthiness would have to be checked separately.
 - `phoneNumberRegex` can match credit card numbers when they appear without separators.
 - `creditCardRegex` just checks if the card matches desired format. It can't distinguish a real card number from a fake one that happens to have a valid prefix and length.
