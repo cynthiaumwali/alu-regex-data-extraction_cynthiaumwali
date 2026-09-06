@@ -28,20 +28,20 @@ async function regexOnboarding(path) {
       const matchingEmails = line.match(regexPatterns.emailRegex);
       if (matchingEmails) {
         validEmails.push(...matchingEmails);
-        appendFileSync(outputFile, "Valid Emails:\n");
-        appendFileSync(outputFile, matchingEmails.join("\n"));
+        writeFileSync(outputFile, "Valid Emails:\n");
+        writeFileSync(outputFile, matchingEmails.join("\n"));
       }
       const matchingALUEmails = line.match(regexPatterns.aluEmailSpecificRegex);
       if (matchingALUEmails) {
         validALUEmails.push(...matchingALUEmails);
-        appendFileSync(outputFile, "Valid ALU Emails:\n");
-        appendFileSync(outputFile, matchingALUEmails.join("\n"));
+        writeFileSync(outputFile, "Valid ALU Emails:\n");
+        writeFileSync(outputFile, matchingALUEmails.join("\n"));
       }
       const matchingCreditCards = line.match(regexPatterns.creditCardRegex);
       if (matchingCreditCards) {
         validCreditCards.push(...matchingCreditCards);
-        appendFileSync(outputFile, "Valid Credit Cards:\n");
-        appendFileSync(outputFile, matchingCreditCards.join("\n"));
+        writeFileSync(outputFile, "Valid Credit Cards:\n");
+        writeFileSync(outputFile, matchingCreditCards.join("\n"));
       }
     });
     line.on("close", () => {
