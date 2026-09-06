@@ -17,12 +17,13 @@ const regexPatterns = {
     // Discover: starting with 6 and is 16 digits long
     // American Express: starting with 3 and is 15 digits long
     /(?:4[0-9]{12}(?:[0-9]{3})?|(?:5[1-5][0-9]{14}|222[1-9][0-9]{12}|22[3-9][0-9]{13}|2[3-6][0-9]{14}|27[01][0-9]{13}|2720[0-9]{12})|6(?:011|5[0-9]{2})[0-9]{12}|3[47][0-9]{13})/g,
-    
 };
 
 const validEmails = [];
 const validALUEmails = [];
 const validCreditCards = [];
+const validPhoneNumbers = [];
+
 const outputFile = "./output/results.txt";
 async function regexOnboarding(path) {
   try {
@@ -35,13 +36,13 @@ async function regexOnboarding(path) {
       if (matchingEmails) {
         validEmails.push(...matchingEmails);
         appendFileSync(outputFile, "Valid Emails:\n", "utf8");
-        appendFileSync(outputFile, matchingEmails.join("\n"), "utf8");
+        appendFileSync(outputFile, matchingEmails.join("\n") + "\n", "utf8");
       }
       const matchingALUEmails = line.match(regexPatterns.aluEmailSpecificRegex);
       if (matchingALUEmails) {
         validALUEmails.push(...matchingALUEmails);
         appendFileSync(outputFile, "Valid ALU Emails:\n", "utf8");
-        appendFileSync(outputFile, matchingALUEmails.join("\n"), "utf8");
+        appendFileSync(outputFile, matchingALUEmails.join("\n") + "\n", "utf8");
       }
       const matchingCreditCards = cleanCreditCardNumber(line).match(
         regexPatterns.creditCardRegex,
@@ -49,11 +50,28 @@ async function regexOnboarding(path) {
       if (matchingCreditCards) {
         validCreditCards.push(...matchingCreditCards);
         appendFileSync(outputFile, "Valid Credit Cards:\n", "utf8");
-        appendFileSync(outputFile, matchingCreditCards.join("\n"), "utf8");
+        appendFileSync(
+          outputFile,
+          matchingCreditCards.join("\n") + "\n",
+          "utf8",
+        );
+      }
+      const matchingPhoneNumbers = line.match(regexPatterns.phoneNumberRegex);
+      if (matchingPhoneNumbers) {
+        validPhoneNumbers.push(...matchingPhoneNumbers);
+        appendFileSync(outputFile, "Valid Phone Numbers:\n", "utf8");
+        appendFileSync(
+          outputFile,
+          matchingPhoneNumbers.join("\n") + "\n",
+          "utf8",
+        );
       }
     });
     line.on("close", () => {
       console.log("Valid emails found:", validEmails);
+      console.log("Valid ALU emails found:", validALUEmails);
+      console.log("Valid credit cards found:", validCreditCards);
+      console.log("Valid phone numbers found:", validPhoneNumbers);
     });
   } catch (error) {
     console.error("Error during regex onboarding:", error);
