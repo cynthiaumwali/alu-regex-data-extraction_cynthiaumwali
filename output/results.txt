@@ -1,0 +1,13 @@
+j.mutoni@alueducation.com
+jean.mutoni@alumni.alueducation.com
+sione.k@si.alueducation.com
+jean.mutoni92+support@gmail.com
+billing-noreply@payments.example.co
+billing@payments.example.co
+student@alueducation.com.evil-domain.net
+victim@example.com
+attacker@evil.com
+fatuma.h@si.alueducation.com
+partnerships@vendor-invoices.biz
+j.mutoni@alueducation.comjean.mutoni@alumni.alueducation.comsione.k@si.alueducation.comjean.mutoni92+support@gmail.combilling-noreply@payments.example.cobilling@payments.example.costudent@alueducation.com.evil-domain.netvictim@example.com
+attacker@evil.comfatuma.h@si.alueducation.compartnerships@vendor-invoices.biz
