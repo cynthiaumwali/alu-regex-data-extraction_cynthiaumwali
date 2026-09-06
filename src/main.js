@@ -17,6 +17,10 @@ const regexPatterns = {
     // Discover: starting with 6 and is 16 digits long
     // American Express: starting with 3 and is 15 digits long
     /(?:4[0-9]{12}(?:[0-9]{3})?|(?:5[1-5][0-9]{14}|222[1-9][0-9]{12}|22[3-9][0-9]{13}|2[3-6][0-9]{14}|27[01][0-9]{13}|2720[0-9]{12})|6(?:011|5[0-9]{2})[0-9]{12}|3[47][0-9]{13})/g,
+    // This regex matches phone number formats that are internationally recognized, making country codes optional.
+    // it only allows digits with a maximum number of 15 digits, and an optional + sign at the start.
+    phoneNumberRegex: /^\+?[0-9]\d{1,14}$/,
+    timeFormatRegex: /^(?:[01]?\d|2[0-3]):[0-5]\d$/,
 };
 
 const validEmails = [];
