@@ -1,4 +1,5 @@
-j.mutoni@alueducation.com
+Valid emails found:
+ j.mutoni@alueducation.com
 jean.mutoni@alumni.alueducation.com
 sione.k@si.alueducation.com
 jean.mutoni92+support@gmail.com
@@ -9,5 +10,43 @@ victim@example.com
 attacker@evil.com
 fatuma.h@si.alueducation.com
 partnerships@vendor-invoices.biz
-j.mutoni@alueducation.comjean.mutoni@alumni.alueducation.comsione.k@si.alueducation.comjean.mutoni92+support@gmail.combilling-noreply@payments.example.cobilling@payments.example.costudent@alueducation.com.evil-domain.netvictim@example.com
-attacker@evil.comfatuma.h@si.alueducation.compartnerships@vendor-invoices.biz
+
+Valid ALU emails found:
+ j.mutoni@alueducation.com
+jean.mutoni@alumni.alueducation.com
+sione.k@si.alueducation.com
+fatuma.h@si.alueducation.com
+
+Valid credit cards found:
+ 4539148803436467
+5555555555554444
+340000000000009
+6011000990139424
+
+Valid phone numbers found:
+ 2025-11-03
++250 788 123 456
+4539 1488 0343 646
+5555-5555-5555-444
+340000000000009
+1-800-555-0199
+022) 500-1234
+078-345-6721
+6011 0009 9013 942
+2025-12-01
++254 (0) 712 345 67
+020-2345678
++250 794 021 590
+
+Valid time formats found:
+ 14:30
+2:45
+8:00
+5:00
+23:59
+11:59
+09:15
+17:00
+6:30
+00:00
+13:00
